@@ -2,7 +2,7 @@ class Player {
   constructor() {
     this.currentlyPlaying = album.songs[0];
     this.playState = 'stopped';
-    this.volume = 80;
+    this.volume = 10;
     this.soundObject = new buzz.sound(this.currentlyPlaying.soundFileUrl);
   }
 
@@ -12,6 +12,18 @@ class Player {
 
   getTime() {
     return this.soundObject.getTime();
+  }
+
+  prettyTime(timeInSeconds) {
+    var time = timeInSeconds / 60;
+    var minutes = Math.floor(time, -1);
+    var minutesText = minutes.toString().padStart(2, '0');
+
+    var seconds = Math.floor((time - minutes) * 60, -1);
+    var secondsText = seconds.toString().padStart(2, '0');
+
+    //console.log(minutesText + ":" + secondsText);
+    return minutesText + ":" + secondsText;
   }
 
   playPause(song = this.currentlyPlaying) {
